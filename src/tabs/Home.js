@@ -4,7 +4,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../store/auth/thunks";
 
-export const IsLoading = () => {
+export const Home = () => {
 
   const dispatch = useDispatch()
 
@@ -16,6 +16,7 @@ export const IsLoading = () => {
     <>
       <AppBar
         color='#052659'
+        title='Fernan'
         style={{ alignItems: "flex-end" }}
         contentContainerStyle={{alignItems: "center", flexDirection: 'row-reverse'}}
         leading={props => (

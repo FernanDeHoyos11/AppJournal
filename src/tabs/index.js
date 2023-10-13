@@ -1,3 +1,3 @@
-export * from './IsLoading'
+export * from './Home'
 export * from './MyNotes'
 export * from './NewNote'

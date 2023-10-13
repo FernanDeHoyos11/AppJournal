@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { IsLoading, MyNotes, NewNote } from "./tabs";
-import { LoginScreen } from "./auth/Login";
+import { Home, MyNotes, NewNote } from "./tabs";
+
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -17,10 +17,10 @@ export const Tabs = () => {
     >
       
       <Tab.Screen
-        name="IsLoading"
-        component={IsLoading}
+        name="home"
+        component={Home}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Inicio',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={20}  />
           ),
@@ -30,9 +30,9 @@ export const Tabs = () => {
         name="MyNotes"
         component={MyNotes}
         options={{
-          tabBarLabel: 'MyNotes',
+          tabBarLabel: 'Mis Notas',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={20} />
+            <MaterialCommunityIcons name="note-multiple" color={color} size={20} />
           ),
         }}
       />
@@ -40,9 +40,9 @@ export const Tabs = () => {
         name="NewNote"
         component={NewNote}
         options={{
-          tabBarLabel: 'NewNote',
+          tabBarLabel: 'Nueva',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={20} />
+            <MaterialCommunityIcons name="newspaper-plus" color={color} size={20} />
           ),
         }}
       />
