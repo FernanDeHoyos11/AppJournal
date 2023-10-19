@@ -15,7 +15,7 @@ export const Home = () => {
   return (
     <>
       <AppBar
-        color='#052659'
+        color='#114C5F'
         title='Fernan'
         style={{ alignItems: "flex-end" }}
         contentContainerStyle={{alignItems: "center", flexDirection: 'row-reverse'}}

@@ -4,26 +4,23 @@ import { AuthStackNavigator } from "./navigator/AuthNavigator";
 import { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useEffect } from "react";
+import { useCheckAuth } from "./hooks/useCheckAuth";
 
 
 export const AppMain = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false); 
-  const { status } = useSelector(state => state.auth);
   
-  useEffect(() => {
-    if (status === 'authenticated') {
-      setUserIsLoggedIn(true);
-    }else{
-      setUserIsLoggedIn(false); 
-    }
-  }, [status]);
+  
+  const {status} = useCheckAuth();
 
-    console.log(status)
+  if(status === 'checking'){
+    return  'Cargando'
+}
     
   return (
     <>
     <NavigationContainer>
-    {userIsLoggedIn ? <Tabs /> : <AuthStackNavigator />}
+    { (status === 'authenticated') ? <Tabs /> : <AuthStackNavigator />}
     </NavigationContainer>
   
     </>

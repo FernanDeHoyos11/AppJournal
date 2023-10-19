@@ -1,6 +1,5 @@
-import { SignInWithGoogle, loginWithEmailPassword, registerUserWithEmailPassword } from "../../firebase/Provider"
+import { SignInWithGoogle, linkEmailToUser, loginWithEmailPassword, registerUserWithEmailPassword, registerUserWithEmailPasswordV, waitForEmailVerification } from "../../firebase/Provider"
 import { checkingCredentials, login, logout } from "./AuthSlice"
-
 
 export const checkingAuthentication = () => {
     return async (dispatch) => {
@@ -23,13 +22,31 @@ export const startGoogleSignIn = () => {
 export const startCreatingUserWithEmailPassword = ({email, password, displayName}) => {
     return async (dispatch) => {
         dispatch(checkingCredentials());
-        const {ok, uid, photoURL, errorMessage} = await registerUserWithEmailPassword({email, password, displayName});
+        const {ok, uid, photoURL, errorMessage} = await registerUserWithEmailPasswordV({email, password, displayName});
+        console.log({ok, uid, photoURL, errorMessage})
+        if(ok) {
+            try {
+                linkEmailToUser(email)
+    .then((user) => {
+      console.log("Vinculación exitosa. Usuario vinculado:", user);
+    })
+    .catch((error) => {
+      console.error("Error de vinculación:", error);
+    });
+                dispatch(login({uid, displayName, email, photoURL}))
+            
+            } catch (error) {
+                dispatch(logout({ errorMessage: "Error en la verificación del correo electrónico" }));
+              }
+        }else {
+            console.log('error')
+           return dispatch(logout({errorMessage}));
+           
+        }
         
-        if(!ok) return dispatch(logout({errorMessage}));
-
-        dispatch(login({uid, displayName, email, photoURL}))
     }
 }
+  
 
 
 export const startLoginWithEmailPassword = ({email, password}) => {

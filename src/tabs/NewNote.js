@@ -1,19 +1,29 @@
-import { AppBar, TextInput } from "@react-native-material/core";
+import { AppBar, Button, TextInput } from "@react-native-material/core";
 import { Text, TouchableOpacity, View } from "react-native";
-import { Button } from "react-native-paper";
 import { useForm } from "../hooks/useForm";
+import { startNewNote, startSaveNote } from "../store/journal/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import { setActionNotes } from "../store/journal/journalSlice";
+import { useEffect } from "react";
 
-const data = {
-  title: 'titulo',
-  body: 'nota',
-  date: new Date().getTime()
-}
+
 export const NewNote = () => {
 
-  const {formState, onInputChange, title, body, date} = useForm(data)
+  const dispatch = useDispatch()
+  const navigation = useNavigation();
+ 
+
+  const {active:note,  messageSaved, isSaving} = useSelector(state => state.journal)
+  const {formState, onInputChange, title, body, date} = useForm(note)
+
+  useEffect(() => {
+    dispatch(setActionNotes(formState))
+ }, [formState])
 
   const onSaveNote = () => {
-    //dispatch(startSaveNote());
+    dispatch(startSaveNote());
+    navigation.navigate('MyNotes');
   };
 
   const onInputFile = () => {
@@ -26,7 +36,7 @@ export const NewNote = () => {
   return (
     <>
       <AppBar
-        color='#052659'
+        color='#114C5F'
         title='Nueva nota'
         style={{ alignItems: "flex-end" }}
         contentContainerStyle={{ alignItems: "center", flexDirection: 'row-reverse' }}
@@ -38,20 +48,7 @@ export const NewNote = () => {
         <Text>Subir Archivo</Text>
       </TouchableOpacity>
 
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Button
-          title="Guardar"
-          onPress={onSaveNote}
-         
-        />
-
-        {/* Botón para eliminar */}
-        <Button
-          title="Eliminar"
-          onPress={onDelete}
-         
-        />
-      </View>
+     
 
       <TextInput
        label="Titulo"
@@ -70,6 +67,23 @@ export const NewNote = () => {
         name='body'
         onChangeText={(text) => onInputChange('body', text)}
       />
+
+<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Button
+          color="#052659"
+          title="Guardar"
+          onPress={onSaveNote}
+         
+        />
+
+        {/* Botón para eliminar */}
+        <Button
+          color="error"
+          title="Eliminar"
+          onPress={onDelete}
+         
+        />
+      </View>
 
      {/*  {/* Galería de imágenes 
       note?.imageUrls && note.imageUrls.length > 0 && (
