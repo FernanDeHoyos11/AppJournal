@@ -3,8 +3,6 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { Home, MyNotes, NewNote } from "./tabs";
 import { useDispatch, useSelector } from "react-redux";
 import { startNewNote } from "./store/journal/thunks";
-import { useCheckAuth } from "./hooks/useCheckAuth";
-
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -17,7 +15,6 @@ export const Tabs = () => {
 
    const onNewNote = () => {
       dispatch(startNewNote())
-      console.log('first')
    }
    
 
@@ -40,7 +37,7 @@ export const Tabs = () => {
           tabBarLabel: 'Inicio',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={20}  />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -50,7 +47,7 @@ export const Tabs = () => {
           tabBarLabel: 'Mis Notas',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="note-multiple" color={color} size={20} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -64,8 +61,8 @@ export const Tabs = () => {
         options={{
           tabBarLabel: 'Nueva',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons onPress={onNewNote} name="newspaper-plus" color={color} size={20} />
-          ), 
+            <MaterialCommunityIcons name="newspaper-plus" color={color} size={20} />
+          )
         } }
       />
     </Tab.Navigator>

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { startCreatingUserWithEmailPassword, startLoginWithEmailPassword } from '../store/auth/thunks';
+import { startCreatingUserWithEmailPassword } from '../store/auth/thunks';
 import { TextInput } from '@react-native-material/core';
 
 export  const RegisterScreen = ({navigation}) => {
@@ -24,7 +24,7 @@ export  const RegisterScreen = ({navigation}) => {
    <View style={styles.container}>
      <View style={styles.con}>
       <Text style={styles.title}>Login</Text>
-
+      
       <TextInput
         style={styles.input}
         label='Nombre'

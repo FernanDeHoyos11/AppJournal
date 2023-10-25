@@ -1,11 +1,12 @@
 import { AppBar, Button, TextInput } from "@react-native-material/core";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { useForm } from "../hooks/useForm";
-import { startNewNote, startSaveNote } from "../store/journal/thunks";
+import { startSaveNote } from "../store/journal/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { setActionNotes } from "../store/journal/journalSlice";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 
 
 export const NewNote = () => {
@@ -15,15 +16,35 @@ export const NewNote = () => {
  
 
   const {active:note,  messageSaved, isSaving} = useSelector(state => state.journal)
-  const {formState, onInputChange, title, body, date} = useForm(note)
+  const {formState, onInputChange, title, body, date} = useForm( note)
+
+  console.log(note)
+  const [isNothing, setIsNothing] = useState('')
 
   useEffect(() => {
     dispatch(setActionNotes(formState))
  }, [formState])
 
+ const dateString = useMemo(() => {
+  const newDate = new Date(date);
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long', 
+    day: 'numeric'
+  };
+  return newDate.toLocaleDateString(undefined, options);
+}, [date]);
+
   const onSaveNote = () => {
+    if(title.trim() !== '' && body.trim() !== ''){
     dispatch(startSaveNote());
     navigation.navigate('MyNotes');
+    return
+    }
+
+    setIsNothing('Debe ingresar un titulo y un cuerpo para la nota')
+    
   };
 
   const onInputFile = () => {
@@ -41,14 +62,9 @@ export const NewNote = () => {
         style={{ alignItems: "flex-end" }}
         contentContainerStyle={{ alignItems: "center", flexDirection: 'row-reverse' }}
       />
-      <Text style={{ fontSize: 38, fontWeight: 'light' }}> 13-13-2022</Text>
+      <Text style={{ fontSize: 21, fontWeight: 'bold' }}> {dateString} </Text>
 
-      {/* Botón para seleccionar archivos */}
-      <TouchableOpacity onPress={onInputFile}>
-        <Text>Subir Archivo</Text>
-      </TouchableOpacity>
 
-     
 
       <TextInput
        label="Titulo"
@@ -61,7 +77,7 @@ export const NewNote = () => {
 
       <TextInput
       label="Nota"
-        style={{ fontSize: 20, marginBottom: 8, textAlignVertical: 'top' }}
+        style={{ fontSize: 20, marginBottom: 8, verticalAlign: 'top' }}
         placeholder="¿Qué sucedió hoy?"
         value={body}
         name='body'
@@ -76,7 +92,6 @@ export const NewNote = () => {
          
         />
 
-        {/* Botón para eliminar */}
         <Button
           color="error"
           title="Eliminar"
@@ -85,15 +100,7 @@ export const NewNote = () => {
         />
       </View>
 
-     {/*  {/* Galería de imágenes 
-      note?.imageUrls && note.imageUrls.length > 0 && (
-        <ImageGallery images={note.imageUrls} />
-      )
- */}
-      {/* Mensaje de éxito 
-      {messageSaved.length > 0 && (
-        <Text>{messageSaved}</Text>
-      )}*/}
+      
     </>
   );
 }

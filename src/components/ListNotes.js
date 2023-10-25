@@ -1,10 +1,10 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import {  Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../styles';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { setActionNotes } from '../store/journal/journalSlice';
 import { useNavigation } from '@react-navigation/native';
-import { Button, FAB, IconButton } from '@react-native-material/core';
+import {  FAB } from '@react-native-material/core';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { startDeletingNote } from '../store/journal/thunks';
 

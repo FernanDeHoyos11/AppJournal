@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList } from "react-native";
 import { SideBarItem } from "../components/ListNotes";
 import { AppBar } from "@react-native-material/core";
 import { useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 export const MyNotes = () => {
 
-  const { displayName } = useSelector(state => state.auth)
+  //const { displayName } = useSelector(state => state.auth)
   const { notes } = useSelector(state => state.journal)
 
   console.log(notes)
@@ -31,7 +31,7 @@ export const MyNotes = () => {
             body={item.body}
             date={item.date}
             imageUrls={item.imageUrls}
-           // onOff={onOffFunction}  Reemplaza por la función adecuada
+      
           />
         )}
       />

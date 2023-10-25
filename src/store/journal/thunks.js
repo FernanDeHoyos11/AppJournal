@@ -1,6 +1,6 @@
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addEmtyNewNotes, deleteNoteById, savingNote, setActionNotes, setNotes, setPhotosActiveNote, setSaving, updateNotes } from "./journalSlice";
+import { addEmtyNewNotes, deleteNoteById, savingNote, setActionNotes, setNotes, setSaving, updateNotes } from "./journalSlice";
 import { startLoad } from "../../helpers/LoadNotes";
 
 export const startNewNote = () => {
@@ -20,8 +20,8 @@ export const startNewNote = () => {
         const newDoc = doc(collection(FirebaseDB, `${uid}/journalApp/notes`));
         await setDoc(newDoc, newNote)
         newNote.id = newDoc.id;
-        /* dispatch(addEmtyNewNotes(newNote))
-        dispatch(setActionNotes(newNote)) */
+        dispatch(addEmtyNewNotes(newNote))
+        dispatch(setActionNotes(newNote)) 
     }
 }
 

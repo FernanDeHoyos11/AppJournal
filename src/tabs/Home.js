@@ -1,4 +1,4 @@
-import { AppBar, Button, IconButton } from "@react-native-material/core";
+import { AppBar, IconButton } from "@react-native-material/core";
 import { Text, View } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
