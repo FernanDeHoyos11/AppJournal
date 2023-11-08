@@ -7,10 +7,7 @@ import { useSelector } from "react-redux";
 
 export const MyNotes = () => {
 
-  //const { displayName } = useSelector(state => state.auth)
   const { notes } = useSelector(state => state.journal)
-
-  console.log(notes)
 
   return (
       <>
@@ -20,7 +17,8 @@ export const MyNotes = () => {
         style={{ alignItems: "flex-end" }}
         contentContainerStyle={{alignItems: "center", flexDirection: 'row-reverse'}}
         />
-      <FlatList
+
+<FlatList
         style={{ flexDirection: "column", backgroundColor: '#FDFFFF'}}
         data={notes}
         keyExtractor={(item) => item.id.toString()}
@@ -31,7 +29,6 @@ export const MyNotes = () => {
             body={item.body}
             date={item.date}
             imageUrls={item.imageUrls}
-      
           />
         )}
       />

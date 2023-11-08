@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import {  useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { startGoogleSignIn, startLoginWithEmailPassword } from '../store/auth/thunks';
@@ -8,8 +8,7 @@ export  const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {status, errorMessage,  } = useSelector(state => state.auth)
-  const isAuthenticated = useMemo(() => status === 'checking', [status]);
+  const { errorMessage } = useSelector(state => state.auth)
 
   const dispatch = useDispatch()
 
@@ -46,13 +45,12 @@ export  const LoginScreen = ({navigation}) => {
         value={password}
         secureTextEntry
       />
-
       <Box
        style={{ 
         display: errorMessage ? '' : 'none',
         marginRight: 15,
         marginLeft: 15, }}>
-         <Text style={styles.error} >{errorMessage}</Text>
+         <Text style={styles.error}>{errorMessage}</Text>
       </Box>
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
@@ -66,7 +64,6 @@ export  const LoginScreen = ({navigation}) => {
       <TouchableOpacity style={styles.PressText} onPress={handleNavigateToRegister}>
         <Text style={styles.Text}>Crear una cuenta</Text>
       </TouchableOpacity>
-
     </View>
    </View>
   );

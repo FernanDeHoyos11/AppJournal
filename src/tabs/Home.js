@@ -20,12 +20,10 @@ export const Home = () => {
         style={{ alignItems: "flex-end" }}
         contentContainerStyle={{alignItems: "center", flexDirection: 'row-reverse'}}
         leading={props => (
-
           <IconButton icon={props => <Icon name="logout"   onPress={onClickLogout} {...props} />}  {...props} />
-
         )} />
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Feed!</Text>
+        <Text>Feed</Text>
       </View>
     </>
 

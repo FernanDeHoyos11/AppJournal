@@ -8,7 +8,6 @@ export const TabNavigator = () => {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Details" component={DetailsScreen} />
-      {/* Agrega más pantallas aquí según tus necesidades */}
     </Tab.Navigator>
   );
 }

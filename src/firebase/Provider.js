@@ -62,26 +62,6 @@ export const loginWithEmailPassword = async ({email, password}) => {
     }
 };
 
-export const registerUserWithEmailPasswordV = async ({ email, password, displayName }) => {
-    try {
-      const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
-      const { uid, photoURL } = resp.user;
-  
-      
-      await updateProfile(FirebaseAuth.currentUser, { displayName });
-      
-  
-      return {
-        ok: true,
-        uid,
-        photoURL,
-        email,
-        displayName,
-      };
-    } catch (error) {
-      return { ok: false, errorMessage: error.message };
-    }
-  };
 
 
   
@@ -98,13 +78,7 @@ export const registerUserWithEmailPasswordV = async ({ email, password, displayN
   };
   
   
- /*  linkEmailToUser(emailToLink)
-    .then((user) => {
-      console.log("Vinculación exitosa. Usuario vinculado:", user);
-    })
-    .catch((error) => {
-      console.error("Error de vinculación:", error);
-    }); */
+ 
   
   
   

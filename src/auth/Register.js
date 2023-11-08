@@ -24,7 +24,6 @@ export  const RegisterScreen = ({navigation}) => {
    <View style={styles.container}>
      <View style={styles.con}>
       <Text style={styles.title}>Login</Text>
-      
       <TextInput
         style={styles.input}
         label='Nombre'
@@ -55,7 +54,6 @@ export  const RegisterScreen = ({navigation}) => {
       <TouchableOpacity style={styles.PressText} onPress={handleNavigateToRegister}>
         <Text style={styles.Text}>Ir a login</Text>
       </TouchableOpacity>
-
     </View>
    </View>
   );

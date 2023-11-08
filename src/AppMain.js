@@ -12,7 +12,7 @@ export const AppMain = () => {
   const {status} = useCheckAuth();
 
   if(status === 'checking'){
-    return  <> <Text>Cargando...</Text></>
+    return  <><Text>Cargando...</Text></>
 }
     
   return (
@@ -20,7 +20,6 @@ export const AppMain = () => {
     <NavigationContainer>
     { (status === 'authenticated') ? <Tabs /> : <AuthStackNavigator />}
     </NavigationContainer>
-  
     </>
   )
 }
